@@ -1,0 +1,117 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="container">
+    <h1>Find a campground close to you!</h1>
+    
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <form action="/campgrounds/search" method="POST" class="validated-form" novalidate>
+                <div class="row mb-3">
+                    <div class="form-group col-md-6 col-sm-12">
+                        <label for="state">Choose a state:  </label>
+                        <select name="state" id="state" class="form-select" required>
+                            <option value="Alabama">Alabama</option>
+                            <option value="Alaska">Alaska</option>
+                            <option value="Arizona">Arizona</option>
+                            <option value="Arkansas">Arkansas</option>
+                            <option value="California">California</option>
+                            <option value="Colorado">Colorado</option>
+                            <option value="Connecticut">Connecticut</option>
+                            <option value="Delaware">Delaware</option>
+                            <option value="Florida">Florida</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="Hawaii">Hawaii</option>
+                            <option value="Idaho">Idaho</option>
+                            <option value="Illinois">Illinois</option>
+                            <option value="Indiana">Indiana</option>
+                            <option value="Iowa">Iowa</option>
+                            <option value="Kansas">Kansas</option>
+                            <option value="Kentucky">Kentucky</option>
+                            <option value="Louisiana">Louisiana</option>
+                            <option value="Maine">Maine</option>
+                            <option value="Maryland">Maryland</option>
+                            <option value="Massachusetts">Massachusetts</option>
+                            <option value="Michigan">Michigan</option>
+                            <option value="Minnesota">Minnesota</option>
+                            <option value="Mississippi">Mississippi</option>
+                            <option value="Missouri">Missouri</option>
+                            <option value="Montana">Montana</option>
+                            <option value="Nebraska">Nebraska</option>
+                            <option value="Nevada">Nevada</option>
+                            <option value="New Hampshire">New Hampshire</option>
+                            <option value="New Jersey">New Jersey</option>
+                            <option value="New Mexico">New Mexico</option>
+                            <option value="New York">New York</option>
+                            <option value="North Carolina">North Carolina</option>
+                            <option value="North Dakota">North Dakota</option>
+                            <option value="Ohio">Ohio</option>
+                            <option value="Oklahoma">Oklahoma</option>
+                            <option value="Oregon">Oregon</option>
+                            <option value="Pennsylvania">Pennsylvania</option>
+                            <option value="Rhode Island">Rhode Island</option>
+                            <option value="South Carolina">South Carolina</option>
+                            <option value="South Dakota">South Dakota</option>
+                            <option value="Tennessee">Tennessee</option>
+                            <option value="Texas">Texas</option>
+                            <option value="Utah">Utah</option>
+                            <option value="Vermont">Vermont</option>
+                            <option value="Virginia">Virginia</option>
+                            <option value="Washington">Washington</option>
+                            <option value="West Virginia">West Virginia</option>
+                            <option value="Wisconsin">Wisconsin</option>
+                            <option value="Wyoming">Wyoming</option>
+                        </select>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6 col-sm-12">
+                        <label for="maxPrice">Maximum Price: <span><strong  id="currentPriceSetting">150</strong></span> </label>
+                        <input type="range" name="maxPrice" class="form-range priceRange" min="0" max="300" step="1"  id="maxPrice">
+                        <div class="valid-feedback">
+                            Looks Good!
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-success">Submit</button>
+            </form>
+        
+            <div class="row">
+                <% if(foundCampgrounds.length > 0) { %>
+                    <p>Showing <strong><%= foundCampgrounds.length %></strong> result(s) for campgrounds in <strong><%= state %> </strong> for less than <strong><%= maxPrice %> </strong> Dollars:</p>
+                    <% for(let campground of foundCampgrounds) { %>
+
+                        <div class="col-xl-6 col-md-12   mb-5">
+                            
+                            <div class="card" style="width: 18rem;">
+                                <img class="card-img-top" src="<%=campground.images[0].url%>" alt="Card image cap">
+                                <div class="card-body">
+                                  <h5 class="card-title"><%= campground.title %> </h5>
+                                  <p class="list-group-item "><strong>$<%= campground.price %></strong> <span class="text-muted"> in <%= campground.city %>, <%= campground.state %></span></p>
+                                  <a href="/campgrounds/<%=campground._id%>" class="btn btn-primary">Read More</a>
+                                </div>
+                              </div>
+                        </div>    
+                        
+                        
+                    <% } %> 
+                <% } %> 
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-12 =">
+            <div class="mb-5" id="cluster-map"></div>
+        </div>
+    </div>
+
+</div>
+<% if(foundCampgrounds.length >0) { %>
+    <script>
+        const mapToken = "<%- process.env.MAPBOX_TOKEN %>";
+        const foundCampgrounds = <%- JSON.stringify(foundCampgrounds) %>;
+    </script>
+    
+    <script src="/javascripts/searchPageMap.js"></script>
+    
+<% } %> 
+
+<script src="/javascripts/searchPage.js"></script>

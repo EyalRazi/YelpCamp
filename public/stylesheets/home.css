@@ -1,0 +1,95 @@
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(70%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+body {
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("https://images.unsplash.com/photo-1559521783-1d1599583485?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80");
+  background-size: cover;
+  background-position: center;
+
+  box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.cover-container {
+  max-width: 60vw;
+}
+.main-area-responsive {
+  animation: 1.5s ease-out 0s 1 slideInFromBottom;
+}
+.nav-link {
+  padding: 0.25rem 0;
+  margin-left: 1.4rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  border-bottom: 0.15rem solid transparent;
+}
+
+.nav-link:hover {
+  border-bottom-color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.nav-link.active {
+  color: white;
+  border-bottom-color: white;
+}
+.btn-secondary,
+.btn-secondary:hover {
+  color: #333;
+  text-shadow: none;
+}
+
+.campground-image-card {
+  height: 100%;
+}
+
+/* main page styles tablet mode */
+@media screen and (max-width: 768px) {
+  .nav-logo-text {
+    display: none;
+  }
+  .mobile-float-right {
+    float: none !important;
+  }
+
+  .mobile-nav a {
+    margin: 0 1rem;
+  }
+  .mobile-signintext {
+    display: inline;
+  }
+  .mobile-header-text {
+    font-size: 5.3rem;
+    margin-bottom: 2.7rem;
+  }
+  .mobile-lead {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+}
+
+/* main page styles tablet mode */
+@media screen and (max-width: 480px) {
+  .home-mobile {
+    display: none;
+  }
+  .mobile-nav a {
+    margin: 0 0.4rem 0 0.4rem;
+  }
+
+  .mobile-header-text {
+    font-size: 3rem;
+    margin-bottom: 1.6rem;
+  }
+  .mobile-lead {
+    display: none;
+  }
+}
